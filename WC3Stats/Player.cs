@@ -29,7 +29,7 @@ namespace WC3Stats
 
         public static Player ParsePlayer(byte[] bytes, int index, bool isMe)
         {
-            var nameBytes = bytes.TakeFromIndexWhileNotZero(index);
+            var nameBytes = bytes.TakeFromIndexWhileNotZeroByte(index);
             var name = nameBytes.AsString();
 
             var raceOffset = index + name.Length + 6;

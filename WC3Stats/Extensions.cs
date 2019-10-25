@@ -26,7 +26,7 @@ namespace WC3Stats
             }
         }
 
-        public static byte[] TakeFromIndexWhileNotZero(this byte[] bytes, int index)
+        public static byte[] TakeFromIndexWhileNotZeroByte(this byte[] bytes, int index)
         {
             var destinationBytes = new byte[bytes.Length - index];
 

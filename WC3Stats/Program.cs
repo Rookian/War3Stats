@@ -20,7 +20,6 @@ namespace WC3Stats
 
             while (true)
             {
-                var gameMonitor = new GameMonitor();
                 Console.WriteLine();
                 Console.WriteLine("Waiting for game ...");
                 var game = await GameMonitor.Start();
