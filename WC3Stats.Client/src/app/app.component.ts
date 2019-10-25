@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
       return console.error(err.toString());
     });
 
-    connection.on('Connected', (conid, message) => {
-      console.log(conid + ' ' + message);
+    connection.on('Send', (message) => {
+      console.log(message);
     });
 
   }

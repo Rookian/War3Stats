@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +25,7 @@ namespace WC3Stats.Server
                     .AllowAnyMethod()
                     .AllowCredentials()));
             services.AddSignalR();
+            services.AddHostedService<War3BackgroundService>();
 
         }
 
@@ -41,21 +40,7 @@ namespace WC3Stats.Server
             app.UseCors("CorsPolicy");
             app.UseRouting();
 
-            app.UseEndpoints(x => x.MapHub<WC3Hub>("/wc3"));
+            app.UseEndpoints(x => x.MapHub<Wc3Hub>("/wc3"));
         }
     }
-
-    public class WC3Hub : Hub
-    {
-        public override async Task OnConnectedAsync()
-        {
-            await Clients.All.SendAsync("Connected", Context.ConnectionId, "Yeahaa!");
-        }
-
-        public async Task Send(string message)
-        {
-            await Clients.All.SendAsync("Send", message);
-        }
-    }
-
 }
