@@ -9,7 +9,7 @@ using SharpPcap;
 
 namespace WC3Stats
 {
-    public class GameMonitor
+    public static class GameMonitor
     {
         public static async Task<List<Player>> LookForPlayers()
         {

@@ -15,12 +15,12 @@ namespace WC3Stats.Server
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var x = 0;
             while (!stoppingToken.IsCancellationRequested)
             {
-                x++;
-                await _hub.Clients.All.Send(x.ToString());
-                await Task.Delay(1000);
+                await Task.Delay(100); // Need to delay else server is not starting (bug?!)
+                var players = await GameMonitor.LookForPlayers();
+                await _hub.Clients.All.Send(players);
+                
             }
         }
     }
