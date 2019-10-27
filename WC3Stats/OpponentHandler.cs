@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace WC3Stats
 {
-    public class OpponentHandler : IPlayerHandler<IEnumerable<Player>>
+    public class OpponentHandler : IPlayerHandler
     {
         private static readonly byte[] Pattern = { 0x00, 0x00, 0xf7, 0x06 };
 

@@ -10,6 +10,7 @@ namespace WC3Stats
     {
         static async Task Main()
         {
+
             Console.SetCursorPosition((Console.WindowWidth - 46) / 2, Console.CursorTop);
             Console.WriteLine("╦ ╦┌─┐┬─┐┌─┐┬─┐┌─┐┌─┐┌┬┐  ╦╦╦  ╔═╗┌┬┐┌─┐┌┬┐┌─┐");
             Console.SetCursorPosition((Console.WindowWidth - 46) / 2, Console.CursorTop);
@@ -17,15 +18,23 @@ namespace WC3Stats
             Console.SetCursorPosition((Console.WindowWidth - 46) / 2, Console.CursorTop);
             Console.WriteLine("╚╩╝┴ ┴┴└─└─┘┴└─┴ ┴└   ┴   ╩╩╩  ╚═╝ ┴ ┴ ┴ ┴ └─┘");
 
+            //do
+            //{
+            //    Console.WriteLine();
+            //    Console.WriteLine("Waiting for game ...");
+            //    var playerStream = new PlayerStream();
+            //    var playerObserver = new PlayerObserver();
+            //    playerStream.Subscribe(playerObserver);
+            //    await playerStream.LookForPlayers();
+            //} while (true);
 
             while (true)
             {
                 Console.WriteLine();
                 Console.WriteLine("Waiting for game ...");
-                var game = await GameMonitor.Start();
+                var players = await GameMonitor.LookForPlayers();
 
-                Console.WriteLine("Game started");
-                foreach (var teamGroup in game.Players.GroupBy(x => x.Team))
+                foreach (var teamGroup in players.GroupBy(x => x.Team))
                 {
                     Console.WriteLine($"#Team {teamGroup.Key}");
                     foreach (var player in teamGroup.OrderByDescending(x => x.PlayerStats.TeamWinRate))

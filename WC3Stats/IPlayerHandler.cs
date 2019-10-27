@@ -1,8 +1,10 @@
-﻿namespace WC3Stats
+﻿using System.Collections.Generic;
+
+namespace WC3Stats
 {
-    public interface IPlayerHandler<T>
+    public interface IPlayerHandler
     {
         bool Accepts(byte[] bytes);
-        T Handle(byte[] bytes);
+        IEnumerable<Player> Handle(byte[] bytes);
     }
 }
