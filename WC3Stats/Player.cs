@@ -9,12 +9,13 @@ namespace WC3Stats
     }
     public class Player
     {
-        public Player(string name, Races race, int id, bool isMe)
+        public Player(string name, Races race, int id, bool isMe, byte[] bytes)
         {
             Name = name;
             Race = race;
             Id = id;
             IsMe = isMe;
+            Bytes = bytes;
         }
 
         public Team Team => Id % 2 == 0 ? Team.TeamOne : Team.TeamTwo;
@@ -26,6 +27,7 @@ namespace WC3Stats
 
         public PlayerStats PlayerStats { get; set; }
         public bool IsMe { get; }
+        public byte[] Bytes { get; }
 
         public static Player ParsePlayer(byte[] bytes, int index, bool isMe)
         {
@@ -36,7 +38,7 @@ namespace WC3Stats
             var race = (Races)bytes[raceOffset];
             int id = bytes[index - 1];
 
-            return new Player(name, race, id, isMe);
+            return new Player(name, race, id, isMe, bytes);
         }
         public override string ToString()
         {

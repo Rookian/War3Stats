@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace WC3Stats
 {
-    public class OpponentHandler
+    public class OpponentHandler : IPlayerHandler<IEnumerable<Player>>
     {
         private static readonly byte[] Pattern = { 0x00, 0x00, 0xf7, 0x06 };
 
@@ -19,7 +21,12 @@ namespace WC3Stats
 
             foreach (var index in indexes)
             {
-                yield return Player.ParsePlayer(bytes, index + 11, false);
+                var player = Player.ParsePlayer(bytes, index + 11, false);
+                
+                if (string.IsNullOrWhiteSpace(player.Name))
+                    File.WriteAllText("emptyOpponent.json", JsonConvert.SerializeObject(player));
+
+                yield return player;
             }
         }
 

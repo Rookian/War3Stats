@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using PacketDotNet;
 using SharpPcap;
 
@@ -25,6 +27,7 @@ namespace WC3Stats
             device.Filter = "ip and tcp";
 
             var game = new Game();
+
             while (!game.IsReady)
             {
                 var rawCapture = device.GetNextPacket();
@@ -38,14 +41,16 @@ namespace WC3Stats
                 if (opponentHandler.Accepts(tcpPacket.Bytes))
                 {
                     Console.WriteLine("Opponent bytes");
-                    game.Players.AddRange(opponentHandler.Handle(tcpPacket.Bytes));
+                    var players = opponentHandler.Handle(tcpPacket.Bytes);
+                    game.Players.AddRange(players);
                 }
 
                 var myPlayerHandler = new MyPlayerHandler();
                 if (myPlayerHandler.Accepts(tcpPacket.Bytes))
                 {
                     Console.WriteLine("My bytes");
-                    game.Players.Add(myPlayerHandler.Handle(tcpPacket.Bytes));
+                    var player = myPlayerHandler.Handle(tcpPacket.Bytes);
+                    game.Players.Add(player);
                 }
 
                 foreach (var player in game.Players)
@@ -59,11 +64,14 @@ namespace WC3Stats
 
             var playerStatsRetriever = new PlayerStatsRetriever(new DocumentProfileLoader());
 
-            foreach (var player in game.Players)
-            {
-                var playerStats = await playerStatsRetriever.Retrieve(player.Name);
-                player.PlayerStats = playerStats;
-            }
+            await Task.WhenAll(
+                game.Players.Select(async player =>
+                {
+                    var playerStats = await playerStatsRetriever.Retrieve(player.Name);
+                    player.PlayerStats = playerStats;
+                }));
+
+            File.WriteAllText($"game{Guid.NewGuid().ToString()}.json", JsonConvert.SerializeObject(game.Players));
 
             return game;
         }

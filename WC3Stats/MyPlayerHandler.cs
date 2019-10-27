@@ -3,8 +3,7 @@ using System.Linq;
 
 namespace WC3Stats
 {
-
-    public class MyPlayerHandler
+    public class MyPlayerHandler : IPlayerHandler<Player>
     {
         private static readonly byte[] Pattern = { 0x00, 0x00, 0xf7, 0x1e };
         public bool Accepts(byte[] bytes)
