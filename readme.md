@@ -4,4 +4,4 @@ A tool for retrieving player statistics while playing on BattleNet.
 
 War3Stats sniffes TCP packets, interprets them and finds out what game statistics each player has.
 
-Requirements: [NPCAP](https://nmap.org/download.html)
+**Requirements**: [Npcap](https://nmap.org/download.html)
