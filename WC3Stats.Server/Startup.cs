@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Converters;
 
 namespace WC3Stats.Server
 {
@@ -24,7 +25,11 @@ namespace WC3Stats.Server
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()));
-            services.AddSignalR();
+            services.AddSignalR().AddNewtonsoftJsonProtocol(options =>
+            {
+                
+                options.PayloadSerializerSettings.Converters.Add(new StringEnumConverter());
+            });
             services.AddHostedService<War3BackgroundService>();
 
         }

@@ -82,15 +82,16 @@ namespace WC3Stats
         public int SoloWins { get; set; }
         public int SoloLosses { get; set; }
         public int SoloGames => SoloWins + SoloLosses;
-        public decimal SoloWinRate => WinRate(SoloWins, SoloGames);
+        public decimal SoloWinRate => CalculateWinRate(SoloWins, SoloGames);
         public int SoloLevel { get; set; }
         public int TeamWins { get; set; }
         public int TeamLosses { get; set; }
         public int TeamGames => TeamWins + TeamLosses;
-        public decimal TeamWinRate => WinRate(TeamWins, TeamGames);
+        public decimal TeamWinRate => CalculateWinRate(TeamWins, TeamGames);
+        public decimal WinRate => CalculateWinRate(SoloWins + TeamWins, SoloGames + TeamGames);
         public int TeamLevel { get; set; }
 
-        private static decimal WinRate(int wins, int games) => games > 0 ?
+        private static decimal CalculateWinRate(int wins, int games) => games > 0 ?
             decimal.Round(100 * (decimal)wins / games, 1, MidpointRounding.AwayFromZero) :
             0;
 

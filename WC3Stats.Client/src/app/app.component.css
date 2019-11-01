@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: stretch;
+  align-content: stretch;
+  height: 64px;
+  width: 60%;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: stretch;
+  margin: auto;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 4px;
+}
+
+.playername {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.statistics {
+  display: flex;
+  flex-direction: column;
+}
+
+.winrate {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.item {
+  background-color: rgb(124, 9, 232);
+  border: 2px solid rgb(66, 4, 125);
+  border-radius: 2px;
+  color: whitesmoke;
+  justify-self: stretch;
+  margin: auto;
+  width: 220px;
+}
+
+.detailedStats {
+  font-size: 10px;
+  padding-left: 2px;
+}

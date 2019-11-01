@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
+import { inherits } from 'util';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
 
+export class AppComponent implements OnInit {
+  teamOne: Player[] = [];
+  teamTwo: Player[] = [];
   ngOnInit(): void {
     const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
@@ -23,11 +26,19 @@ export class AppComponent implements OnInit {
       return console.error(err);
     });
 
-    connection.on('Send', players => {
+    connection.on('Send', result => {
+      const players = result as Player[];
+
+      this.teamOne = players.filter(x => x.team === 'TeamOne').sort((a, b) => a.playerStats.winRate > b.playerStats.winRate ? -1 : 1);
+      this.teamTwo = players.filter(x => x.team === 'TeamTwo').sort((a, b) => a.playerStats.winRate > b.playerStats.winRate ? -1 : 1);
+
       console.log(players);
     });
-
   }
+}
+
+export interface Grouped<TKey, TValue> extends Array<TValue> {
+  key: TKey;
 }
 
 export interface PlayerStats {
@@ -41,12 +52,13 @@ export interface PlayerStats {
   teamGames: number;
   teamWinRate: number;
   teamLevel: number;
+  winRate: number;
 }
 
 export interface Player {
-  team: number;
+  team: string;
   name: string;
-  race: number;
+  race: string;
   id: number;
   playerStats: PlayerStats;
   isMe: boolean;
@@ -57,10 +69,12 @@ export enum Team {
   TeamTwo = 1
 }
 
-export enum Race {
-  Human = 0x01,
-  Orc = 0x02,
-  NightElf = 0x04,
-  Undead = 0x08,
-  Random = 0x20
-}
+// export enum Race {
+//   Human = 'Human',
+//   Orc = 'Orc',
+//   NightElf = 'NightElf',
+//   Undead = 'Undead',
+//   Random = 'Random'
+// }
+
+

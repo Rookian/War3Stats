@@ -71,6 +71,8 @@ namespace WC3Stats.Tests
             stats.TeamGames.ShouldBe(43);
             stats.TeamWinRate.ShouldBe(62.8m);
             stats.TeamLevel.ShouldBe(12);
+
+            stats.WinRate.ShouldBe(64.6m);
         }
 
         [Fact]

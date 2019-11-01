@@ -1,4 +1,7 @@
-﻿namespace WC3Stats
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace WC3Stats
 {
     public enum Team
     {
@@ -18,6 +21,7 @@
         public Team Team => Id % 2 == 0 ? Team.TeamOne : Team.TeamTwo;
 
         public string Name { get; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public Races Race { get; }
 
         public int Id { get; set; }
