@@ -57,7 +57,7 @@ namespace WC3Stats.Tests
             var playerStats = new PlayerStatsRetriever(new FakeLoader());
 
             // Act
-            var stats = await playerStats.Retrieve("Rookian");
+            var stats = await playerStats.Retrieve("Rookianx");
 
             // Assert
             stats.SoloWins.ShouldBe(4);
