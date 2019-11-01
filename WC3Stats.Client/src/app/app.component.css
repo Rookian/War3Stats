@@ -1,53 +1,21 @@
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: stretch;
-  align-content: stretch;
-  height: 64px;
-  width: 60%;
+ .teamContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 50%;
+    margin: auto;
 }
 
-.header {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: stretch;
-  margin: auto;
+.versus{
+   text-align: center; 
 }
 
-.info {
-  display: flex;
-  flex-direction: column;
-  padding-left: 4px;
-}
-
-.playername {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.statistics {
-  display: flex;
-  flex-direction: column;
-}
-
-.winrate {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.item {
-  background-color: rgb(124, 9, 232);
-  border: 2px solid rgb(66, 4, 125);
-  border-radius: 2px;
-  color: whitesmoke;
-  justify-self: stretch;
-  margin: auto;
-  width: 220px;
-}
-
-.detailedStats {
-  font-size: 10px;
-  padding-left: 2px;
+@media only screen and (max-width: 360px) {
+  .teamContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px;
+    width: 100%;
+  }
 }

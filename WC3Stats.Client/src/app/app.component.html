@@ -1,16 +1,5 @@
-Hallo
-<div class="container">
-  <div class="item" *ngFor="let player of teamOne">
-    <div class="header">
-      <img class="image" src="/assets/{{ player.race }}.png" />
-      <div class="info">
-            <span class="playername">{{ player.name }}</span>
-            <div class="statistics">
-              <span class="winrate">{{ player.playerStats.soloWinRate }}% <span class="detailedStats">({{player.playerStats.soloWins}}/{{player.playerStats.soloLosses}})</span></span>
-              <span class="winrate">{{ player.playerStats.teamWinRate }}% <span class="detailedStats">({{player.playerStats.teamWins}}/{{player.playerStats.teamLosses}})</span></span>
-            </div>
-      </div>
-    </div>
-  </div>
+<div class="teamContainer">
+    <app-team [team]="teamOne"></app-team>
+    <span *ngIf="teamOne.length > 0" class="versus">versus</span>
+    <app-team [team]="teamTwo"></app-team>
 </div>
-Test
