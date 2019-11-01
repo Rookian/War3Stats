@@ -19,6 +19,8 @@ namespace WC3Stats.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(new BackgroundServiceConfiguration(Configuration.GetValue<bool>("Simulate")));
+
             services.AddCors(x => x.AddPolicy("CorsPolicy",
                 builder => builder
                     .WithOrigins("http://localhost:4200")
