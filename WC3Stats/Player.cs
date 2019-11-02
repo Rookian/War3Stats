@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace WC3Stats
@@ -30,7 +31,7 @@ namespace WC3Stats
         public bool IsMe { get; }
 
 
-        public static Player ParsePlayer(byte[] bytes, int index, bool isMe)
+        public static (bool isValid, Player player) TryParsePlayer(byte[] bytes, int index, bool isMe)
         {
             var nameBytes = bytes.TakeFromIndexWhileNotZeroByte(index);
             var name = nameBytes.AsString();
@@ -39,7 +40,10 @@ namespace WC3Stats
             var race = (Races)bytes[raceOffset];
             int id = bytes[index - 1];
 
-            return new Player(name, race, id, isMe);
+
+            return Enum.IsDefined(typeof(Races), (int) bytes[raceOffset]) ?
+                (true, new Player(name, race, id, isMe)) :
+                (false, null);
         }
         public override string ToString()
         {

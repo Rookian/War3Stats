@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace WC3Stats
 {
@@ -21,12 +19,10 @@ namespace WC3Stats
 
             foreach (var index in indexes)
             {
-                var player = Player.ParsePlayer(bytes, index + 11, false);
-                
-                if (string.IsNullOrWhiteSpace(player.Name))
-                    File.WriteAllText("emptyOpponent.json", JsonConvert.SerializeObject(player));
+                var (isValid, player) = Player.TryParsePlayer(bytes, index + 11, false);
 
-                yield return player;
+                if (isValid)
+                    yield return player;
             }
         }
 

@@ -15,7 +15,9 @@ namespace WC3Stats
         public IEnumerable<Player> Handle(byte[] bytes)
         {
             var index = GetMarkerIndexes(bytes).First();
-            yield return Player.ParsePlayer(bytes, index + 21, true);
+            var (isValid, player) = Player.TryParsePlayer(bytes, index + 21, true);
+            if (isValid)
+                yield return player;
         }
 
         private static IEnumerable<int> GetMarkerIndexes(byte[] bytes)
