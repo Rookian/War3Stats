@@ -29,7 +29,7 @@ namespace WC3Stats.Server
             Console.WriteLine();
             Console.WriteLine();
 
-            if (_configuration.Simulate) 
+            if (_configuration.Simulate)
                 Console.WriteLine("Simulation mode active");
 
             WriteLineRight("Powered by Rookian");
@@ -40,15 +40,15 @@ namespace WC3Stats.Server
 
         private static void WriteLineRight(string value)
         {
-            Console.CursorLeft = Console.BufferWidth - value.Length -1;
+            Console.CursorLeft = Console.BufferWidth - value.Length - 1;
             Console.WriteLine(value);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var players = new List<Player>();
             while (!stoppingToken.IsCancellationRequested)
             {
+                List<Player> players;
                 if (_configuration.Simulate)
                 {
                     players = new List<Player>
@@ -68,9 +68,9 @@ namespace WC3Stats.Server
                 }
                 else
                 {
-                    await _hub.Clients.All.Send(players);
                     players = await GameMonitor.LookForPlayers();
-                    await Task.Yield();
+                    await _hub.Clients.All.Send(players);
+                    await Task.Delay(100);
                 }
             }
         }
