@@ -24,6 +24,7 @@ namespace WC3Stats
             var gameStarted = false;
             while (true)
             {
+                await Task.Delay(1);
                 var rawCapture = device.GetNextPacket();
                 if (rawCapture == null) continue;
 
