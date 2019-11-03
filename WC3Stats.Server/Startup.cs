@@ -29,11 +29,11 @@ namespace WC3Stats.Server
                     .AllowCredentials()));
             services.AddSignalR().AddNewtonsoftJsonProtocol(options =>
             {
-                
+
                 options.PayloadSerializerSettings.Converters.Add(new StringEnumConverter());
             });
             services.AddHostedService<War3BackgroundService>();
-
+            services.AddSpaStaticFiles(x => x.RootPath = "wwwroot");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +48,8 @@ namespace WC3Stats.Server
             app.UseRouting();
 
             app.UseEndpoints(x => x.MapHub<Wc3Hub>("/wc3"));
+            app.UseSpa(builder => { });
+            app.UseSpaStaticFiles();
         }
     }
 }
