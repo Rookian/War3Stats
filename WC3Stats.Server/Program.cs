@@ -10,8 +10,6 @@ namespace WC3Stats.Server
     {
         public static async Task Main(string[] args)
         {
-            await Firewall.CreateFirewallRule();
-
             CreateHostBuilder(args).Build().Run();
         }
 
