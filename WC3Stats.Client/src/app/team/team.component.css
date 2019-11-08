@@ -18,10 +18,8 @@
   }
 
   .item {
-    background-color: rgb(124, 9, 232);
-    border: 2px solid rgb(66, 4, 125);
+    border: 2px solid #673AB7;
     border-radius: 2px;
-    color: whitesmoke;
     justify-self: stretch;
     margin: auto;
     width: 220px;
@@ -46,6 +44,7 @@
   .winrate {
     font-size: 14px;
     font-weight: bold;
+    color: #adadad;
   }
 
   .detailedStats {
@@ -72,10 +71,8 @@
   }
 
   .item {
-    background-color: rgb(124, 9, 232);
-    border: 2px solid rgb(66, 4, 125);
+    border: 2px solid #673AB7;
     border-radius: 2px;
-    color: whitesmoke;
     margin: auto;
     width: 180px;
   }
@@ -99,6 +96,7 @@
   .winrate {
     font-size: 10px;
     font-weight: bold;
+    color: #adadad;
   }
 
   .detailedStats {

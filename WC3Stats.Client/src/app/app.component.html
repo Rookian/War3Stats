@@ -1,5 +1,20 @@
-<div class="teamContainer">
+<div class="appcontainer">
+  <div *ngIf="state == states.Disconnected" class="title">
+    <app-loading></app-loading>
+    <div>Connecting...</div>
+  </div>
+
+  <div *ngIf="teamOne.length === 0 && state == states.Connected" class="title">
+    <app-loading></app-loading>
+    <div>Waiting for game...</div>
+  </div>
+
+  <div
+    *ngIf="teamOne.length > 0 && state == states.Connected"
+    class="teamContainer"
+  >
     <app-team [team]="teamOne"></app-team>
-    <span *ngIf="teamOne.length > 0" class="versus">versus</span>
+    <span class="versus">versus</span>
     <app-team [team]="teamTwo"></app-team>
+  </div>
 </div>

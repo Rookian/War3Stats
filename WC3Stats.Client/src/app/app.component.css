@@ -1,13 +1,25 @@
- .teamContainer{
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    width: 50%;
-    margin: auto;
+.appcontainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
 
-.versus{
-   text-align: center; 
+.title {
+  font-size: 40px;
+  text-align: center;
+}
+
+.teamContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 60%;
+  margin: auto;
+}
+
+.versus {
+  text-align: center;
 }
 
 @media only screen and (max-width: 360px) {
@@ -19,3 +31,4 @@
     width: 100%;
   }
 }
+

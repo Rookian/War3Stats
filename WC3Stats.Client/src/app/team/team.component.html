@@ -6,15 +6,15 @@
         <span class="playername">{{ player.name }}</span>
         <div class="statistics">
           <span class="winrate"
-            >{{ player.playerStats.soloWinRate }}%
+            >Solo: {{ player.playerStats.soloWinRate }}%
             <span class="detailedStats"
-              >({{ player.playerStats.soloWins }}/{{
+              > ({{ player.playerStats.soloWins }}/{{
                 player.playerStats.soloLosses
               }})</span
             ></span
           >
           <span class="winrate"
-            >{{ player.playerStats.teamWinRate }}%
+          >Team: {{ player.playerStats.teamWinRate }}%
             <span class="detailedStats"
               >({{ player.playerStats.teamWins }}/{{
                 player.playerStats.teamLosses

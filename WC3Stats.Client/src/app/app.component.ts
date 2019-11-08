@@ -1,44 +1,63 @@
-import { Component, OnInit } from '@angular/core';
-import * as signalR from '@aspnet/signalr';
-import { inherits } from 'util';
+import { Component, OnInit } from "@angular/core";
+import * as signalR from "@aspnet/signalr";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 
 export class AppComponent implements OnInit {
   teamOne: Player[] = [];
   teamTwo: Player[] = [];
-  ngOnInit(): void {
-    const connection = new signalR.HubConnectionBuilder()
-      .configureLogging(signalR.LogLevel.Information)
-      .withUrl('https://localhost:5001/wc3', {
-        transport: signalR.HttpTransportType.WebSockets,
-        skipNegotiation: true
-      })
-      .build();
+  state: signalR.HubConnectionState;
+  states = signalR.HubConnectionState;
 
-    connection.start().then(() => {
-      console.log('SignalR Connected!');
-    }).catch(err => {
-      return console.error(err);
+  async ngOnInit(): Promise<void> {
+
+    const connection = this.Connect();
+
+    await this.start(connection);
+
+    connection.onclose(async () => {
+      console.log("on close");
+      this.state = connection.state;
+      await this.start(connection);
     });
 
-    connection.on('Send', result => {
+    connection.on("Send", result => {
       const players = result as Player[];
+      if (this.teamOne.length === 0) {
+        this.teamOne = players.filter(x => x.team === "TeamOne").sort((a, b) => a.playerStats.winRate > b.playerStats.winRate ? -1 : 1);
+        this.teamTwo = players.filter(x => x.team === "TeamTwo").sort((a, b) => a.playerStats.winRate > b.playerStats.winRate ? -1 : 1);
+      }
 
-      this.teamOne = players.filter(x => x.team === 'TeamOne').sort((a, b) => a.playerStats.winRate > b.playerStats.winRate ? -1 : 1);
-      this.teamTwo = players.filter(x => x.team === 'TeamTwo').sort((a, b) => a.playerStats.winRate > b.playerStats.winRate ? -1 : 1);
 
       console.log(players);
     });
   }
-}
 
-export interface Grouped<TKey, TValue> extends Array<TValue> {
-  key: TKey;
+  private Connect() {
+    return new signalR.HubConnectionBuilder()
+      .configureLogging(signalR.LogLevel.Information)
+      .withUrl("https://localhost:5001/wc3", {
+        transport: signalR.HttpTransportType.WebSockets,
+        skipNegotiation: true
+      })
+      .build();
+  }
+
+  async start(connection: signalR.HubConnection): Promise<void> {
+    try {
+      await connection.start();
+      this.state = connection.state;
+      console.log("connected");
+    } catch (err) {
+      this.state = connection.state;
+      console.log(err);
+      setTimeout(() => this.start(connection), 2000);
+    }
+  }
 }
 
 export interface PlayerStats {
@@ -58,7 +77,7 @@ export interface PlayerStats {
 export interface Player {
   team: string;
   name: string;
-  race: string;
+  race: Race;
   id: number;
   playerStats: PlayerStats;
   isMe: boolean;
@@ -69,12 +88,10 @@ export enum Team {
   TeamTwo = 1
 }
 
-// export enum Race {
-//   Human = 'Human',
-//   Orc = 'Orc',
-//   NightElf = 'NightElf',
-//   Undead = 'Undead',
-//   Random = 'Random'
-// }
-
-
+export enum Race {
+  Human = "Human",
+  Orc = "Orc",
+  NightElf = "NightElf",
+  Undead = "Undead",
+  Random = "Random"
+}

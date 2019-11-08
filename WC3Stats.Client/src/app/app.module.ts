@@ -1,14 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { TeamComponent } from './team/team.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { TeamComponent } from "./team/team.component";
+import { LoadingComponent } from "./loading/loading.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TeamComponent
+    TeamComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
