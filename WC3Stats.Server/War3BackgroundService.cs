@@ -48,9 +48,14 @@ namespace WC3Stats.Server
         {
             while (!stoppingToken.IsCancellationRequested)
             {
+
                 List<Player> players;
                 if (_configuration.Simulate)
                 {
+
+                    await _hub.Clients.All.GameFound();
+                    await Task.Delay(4000, stoppingToken);
+
                     players = new List<Player>
                     {
                         new Player("Rookian", Races.Orc, 1, true){ PlayerStats = PlayerStats()},
@@ -64,11 +69,11 @@ namespace WC3Stats.Server
                         new Player("123456789012345", Races.Random, 8, false){ PlayerStats = PlayerStats()}
                     };
                     await _hub.Clients.All.Send(players);
-                    await Task.Delay(10000, stoppingToken);
+                    await Task.Delay(4000, stoppingToken);
                 }
                 else
                 {
-                    players = await GameMonitor.LookForPlayers();
+                    players = await GameMonitor.LookForPlayers(async () => await _hub.Clients.All.GameFound());
                     await _hub.Clients.All.Send(players);
                     await Task.Delay(100);
                 }

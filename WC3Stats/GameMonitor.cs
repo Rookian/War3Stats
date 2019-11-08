@@ -11,7 +11,7 @@ namespace WC3Stats
 {
     public static class GameMonitor
     {
-        public static async Task<List<Player>> LookForPlayers()
+        public static async Task<List<Player>> LookForPlayers(Func<Task> onGameFound = null)
         {
             var players = new List<Player>();
             var device = IPAddress.Parse("5.42.181.0").GetDefaultCaptureDevice();
@@ -41,6 +41,11 @@ namespace WC3Stats
                         {
                             gameStarted = true;
                             stopwatch.Start();
+
+                            var gameFoundTask = onGameFound?.Invoke();
+                            if (gameFoundTask != null)
+                                await gameFoundTask;
+
                             Console.WriteLine("Game started");
                         }
 

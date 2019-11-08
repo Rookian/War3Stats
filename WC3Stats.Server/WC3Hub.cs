@@ -13,5 +13,6 @@ namespace WC3Stats.Server
     public interface IWc3
     {
         Task Send(List<Player> players);
+        Task GameFound();
     }
 }

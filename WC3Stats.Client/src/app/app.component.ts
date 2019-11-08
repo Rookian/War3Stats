@@ -27,13 +27,14 @@ export class AppComponent implements OnInit {
 
     connection.on("Send", result => {
       const players = result as Player[];
-      if (this.teamOne.length === 0) {
-        this.teamOne = players.filter(x => x.team === "TeamOne").sort((a, b) => a.playerStats.winRate > b.playerStats.winRate ? -1 : 1);
-        this.teamTwo = players.filter(x => x.team === "TeamTwo").sort((a, b) => a.playerStats.winRate > b.playerStats.winRate ? -1 : 1);
-      }
-
-
+      this.teamOne = players.filter(x => x.team === "TeamOne").sort((a, b) => a.playerStats.winRate > b.playerStats.winRate ? -1 : 1);
+      this.teamTwo = players.filter(x => x.team === "TeamTwo").sort((a, b) => a.playerStats.winRate > b.playerStats.winRate ? -1 : 1);
       console.log(players);
+    });
+
+    connection.on("GameFound", () => {
+      this.teamOne = [];
+      this.teamTwo = [];
     });
   }
 
