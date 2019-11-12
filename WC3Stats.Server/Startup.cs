@@ -21,12 +21,6 @@ namespace WC3Stats.Server
         {
             services.AddSingleton(new BackgroundServiceConfiguration(Configuration.GetValue<bool>("Simulate")));
 
-            services.AddCors(x => x.AddPolicy("CorsPolicy",
-                builder => builder
-                    .WithOrigins("http://localhost:4200")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials()));
             services.AddSignalR().AddNewtonsoftJsonProtocol(options =>
             {
 
@@ -44,11 +38,10 @@ namespace WC3Stats.Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors("CorsPolicy");
             app.UseRouting();
 
             app.UseEndpoints(x => x.MapHub<Wc3Hub>("/wc3"));
-            app.UseSpa(builder => { });
+            app.UseSpa(builder => { if(env.IsDevelopment()) builder.UseProxyToSpaDevelopmentServer("http://localhost:4200"); });
             app.UseSpaStaticFiles();
         }
     }

@@ -19,7 +19,7 @@
     },
     "WC3Stats.Server": {
       "commandName": "Project",
-      "commandLineArgs": "Simulate=false",
+      "commandLineArgs": "Simulate=true",
       "launchUrl": "weatherforecast",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

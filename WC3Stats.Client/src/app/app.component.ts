@@ -39,9 +39,11 @@ export class AppComponent implements OnInit {
   }
 
   private Connect() {
+    const url = `${document.location.protocol}//${document.location.host}/wc3`;
+    console.log("url", url);
     return new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
-      .withUrl("https://localhost:5001/wc3", {
+      .withUrl(url, {
         transport: signalR.HttpTransportType.WebSockets,
         skipNegotiation: true
       })
