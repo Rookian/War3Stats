@@ -20,7 +20,9 @@ All what you have to do is to start `WC3Stats.Server.exe`. The browser will be o
 
 [**Download latest version**](https://github.com/Rookian/War3Stats/releases)
 
-**Requirements** [Npcap](https://nmap.org/download.html)
+**Requirements**  
+- [Npcap](https://nmap.org/download.html)
+- [.NET Core 3.0](https://dotnet.microsoft.com/download/thank-you/dotnet-runtime-3.0.0-windows-hosting-bundle-installer)
 
 **Desktop Experience**  
 ![alt text](https://raw.githubusercontent.com/Rookian/War3Stats/master/github/desktop-xp.gif)
