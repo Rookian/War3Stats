@@ -26,3 +26,5 @@ All what you have to do is to start `WC3Stats.Server.exe`. The browser will be o
 ![alt text](https://raw.githubusercontent.com/Rookian/War3Stats/master/github/mobile-xp.gif)
 
 [**Try out simulator!**](https://wc3statsserver.azurewebsites.net/)
+
+[**Download latest version**](https://github.com/Rookian/War3Stats/releases)
