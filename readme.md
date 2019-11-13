@@ -16,7 +16,7 @@ All what you have to do is to start `WC3Stats.Server.exe`. The browser will be o
 - RT 2v2, 3vs3, 4vs4
 - AT not tested
 
-[**Try out simulator!**](https://wc3statsserver.azurewebsites.net/)
+[**Try out simulator!**](https://wc3statsserver.azurewebsites.net/) to get a look and feel of the app.
 
 [**Download latest version**](https://github.com/Rookian/War3Stats/releases)
 
