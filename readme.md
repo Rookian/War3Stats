@@ -7,8 +7,9 @@ War3Stats sniffes TCP packets, interprets them and finds out what game statistic
 
 **Requirements**: [Npcap](https://nmap.org/download.html)
 
-**Desktop Experience:**
+**Desktop Experience:**  
 ![alt text](https://raw.githubusercontent.com/Rookian/War3Stats/master/github/desktop-xp.gif)
 
-**Mobile Experience**
+
+**Mobile Experience:**  
 ![alt text](https://raw.githubusercontent.com/Rookian/War3Stats/master/github/mobile-xp.gif)
