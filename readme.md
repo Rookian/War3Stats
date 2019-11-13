@@ -8,7 +8,9 @@
 
 *then this tool is for you!* :sunglasses:
 
-While your start a game War3Stats sniffs TCP packets, interprets them and finds out game statistics of participating players. All what you have to do is to start `WC3Stats.Server.exe`. The browser will be opened and you can see your games. If you don't have several monitors you can scan the given QR code with your mobile phone. So it is up to you how to use War3Stats using mobile phone or you desktop browser.
+While your start a game War3Stats sniffs TCP packets, interprets them and finds out game statistics of participating players.   
+
+All what you have to do is to start `WC3Stats.Server.exe`. The browser will be opened and you can see your games. If you don't have several monitors you can scan the given QR code with your mobile phone. So it is up to you how to use War3Stats using mobile phone or you desktop browser.
   
 **Supported Games**
 - RT 2v2, 3vs3, 4vs4
