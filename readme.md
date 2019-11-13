@@ -4,7 +4,8 @@
 ## A tool for retrieving player statistics while playing on BattleNet.
 
 *Your are sick of writing*
-> stats 'player name'
+> stats 'player name'  
+
 *then this tool is for you!*
 
 War3Stats sniffes TCP packets, interprets them and finds out what game statistics each player has.
