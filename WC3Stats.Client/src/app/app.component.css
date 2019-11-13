@@ -1,4 +1,4 @@
-.appcontainer{
+.appcontainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,6 +22,15 @@
   text-align: center;
 }
 
+.qrCodeContainer {
+  padding: 30px;
+  display: flex;
+  flex-flow: column;
+  height: 128px;
+  justify-content: center;
+  align-items: center;
+}
+
 @media only screen and (max-width: 360px) {
   .teamContainer {
     display: flex;
@@ -31,4 +40,3 @@
     width: 100%;
   }
 }
-

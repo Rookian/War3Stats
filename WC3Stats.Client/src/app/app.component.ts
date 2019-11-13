@@ -12,9 +12,9 @@ export class AppComponent implements OnInit {
   teamTwo: Player[] = [];
   state: signalR.HubConnectionState;
   states = signalR.HubConnectionState;
-
+  qrCode = "";
   async ngOnInit(): Promise<void> {
-
+    this.qrCode = `${document.location.protocol}//${document.location.host}`;
     const connection = this.Connect();
 
     await this.start(connection);

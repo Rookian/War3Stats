@@ -353,3 +353,6 @@ MigrationBackup/
 .ionide/
 
 node_modules/
+
+build/
+build.zip

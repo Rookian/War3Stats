@@ -20,21 +20,25 @@ namespace WC3Stats.Server
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
-            Console.SetCursorPosition((Console.WindowWidth - 46) / 2, Console.CursorTop);
-            Console.WriteLine("╦ ╦┌─┐┬─┐┌─┐┬─┐┌─┐┌─┐┌┬┐  ╦╦╦  ╔═╗┌┬┐┌─┐┌┬┐┌─┐");
-            Console.SetCursorPosition((Console.WindowWidth - 46) / 2, Console.CursorTop);
-            Console.WriteLine("║║║├─┤├┬┘│  ├┬┘├─┤├┤  │   ║║║  ╚═╗ │ ├─┤ │ └─┐");
-            Console.SetCursorPosition((Console.WindowWidth - 46) / 2, Console.CursorTop);
-            Console.WriteLine("╚╩╝┴ ┴┴└─└─┘┴└─┴ ┴└   ┴   ╩╩╩  ╚═╝ ┴ ┴ ┴ ┴ └─┘");
-            Console.WriteLine();
-            Console.WriteLine();
+            try
+            {
+                Console.SetCursorPosition((Console.WindowWidth - 46) / 2, Console.CursorTop);
+                Console.WriteLine("╦ ╦┌─┐┬─┐┌─┐┬─┐┌─┐┌─┐┌┬┐  ╦╦╦  ╔═╗┌┬┐┌─┐┌┬┐┌─┐");
+                Console.SetCursorPosition((Console.WindowWidth - 46) / 2, Console.CursorTop);
+                Console.WriteLine("║║║├─┤├┬┘│  ├┬┘├─┤├┤  │   ║║║  ╚═╗ │ ├─┤ │ └─┐");
+                Console.SetCursorPosition((Console.WindowWidth - 46) / 2, Console.CursorTop);
+                Console.WriteLine("╚╩╝┴ ┴┴└─└─┘┴└─┴ ┴└   ┴   ╩╩╩  ╚═╝ ┴ ┴ ┴ ┴ └─┘");
+                Console.WriteLine();
+                Console.WriteLine();
 
-            if (_configuration.Simulate)
-                Console.WriteLine("Simulation mode active");
+                if (_configuration.Simulate)
+                    Console.WriteLine("Simulation mode active");
 
-            WriteLineRight("Powered by Rookian");
-            WriteLineRight("https://github.com/Rookian/War3Stats");
-            Console.WriteLine();
+                WriteLineRight("Powered by Rookian");
+                WriteLineRight("https://github.com/Rookian/War3Stats");
+                Console.WriteLine();
+            }
+            catch { }
             return base.StartAsync(cancellationToken);
         }
 
@@ -50,7 +54,7 @@ namespace WC3Stats.Server
             {
 
                 List<Player> players;
-                if (_configuration.Simulate)
+                if (true)
                 {
 
                     await _hub.Clients.All.GameFound();

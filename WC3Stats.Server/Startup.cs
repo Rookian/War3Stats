@@ -23,7 +23,6 @@ namespace WC3Stats.Server
 
             services.AddSignalR().AddNewtonsoftJsonProtocol(options =>
             {
-
                 options.PayloadSerializerSettings.Converters.Add(new StringEnumConverter());
             });
             services.AddHostedService<War3BackgroundService>();
@@ -33,16 +32,16 @@ namespace WC3Stats.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSpaStaticFiles();
+
+            app.UseRouting();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
             app.UseEndpoints(x => x.MapHub<Wc3Hub>("/wc3"));
-            app.UseSpa(builder => { if(env.IsDevelopment()) builder.UseProxyToSpaDevelopmentServer("http://localhost:4200"); });
-            app.UseSpaStaticFiles();
+            app.UseSpa(builder => { if (env.IsDevelopment()) builder.UseProxyToSpaDevelopmentServer("http://localhost:4200"); });
         }
     }
 }
