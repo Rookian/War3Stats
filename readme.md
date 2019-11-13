@@ -1,14 +1,17 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/pf2a28vv3da6tq9k/branch/master?svg=true)](https://ci.appveyor.com/project/Rookian/war3stats/branch/master)
 
 # Warcraft III The Frozen Throne Statistics
-## A tool for retrieving player statistics while playing on BattleNet.
+## A tool for retrieving player statistics while playing on Battle.net.
 
 *Your are sick of writing*
 > stats 'player name'  :unamused:
 
 *then this tool is for you!* :sunglasses:
 
-War3Stats sniffes TCP packets, interprets them and finds out what game statistics each player has.
+While your start a game War3Stats sniffs TCP packets, interprets them and finds out game statistics of participating players.
+Supported Games:
+- RT 2v2, 3vs3, 4vs4
+- AT not tested
 
 **Requirements**: [Npcap](https://nmap.org/download.html)
 
