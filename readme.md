@@ -16,6 +16,10 @@ All what you have to do is to start `WC3Stats.Server.exe`. The browser will be o
 - RT 2v2, 3vs3, 4vs4
 - AT not tested
 
+[**Try out simulator!**](https://wc3statsserver.azurewebsites.net/)
+
+[**Download latest version**](https://github.com/Rookian/War3Stats/releases)
+
 **Requirements** [Npcap](https://nmap.org/download.html)
 
 **Desktop Experience**  
@@ -24,7 +28,3 @@ All what you have to do is to start `WC3Stats.Server.exe`. The browser will be o
 
 **Mobile Experience**  
 ![alt text](https://raw.githubusercontent.com/Rookian/War3Stats/master/github/mobile-xp.gif)
-
-[**Try out simulator!**](https://wc3statsserver.azurewebsites.net/)
-
-[**Download latest version**](https://github.com/Rookian/War3Stats/releases)
