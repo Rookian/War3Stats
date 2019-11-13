@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
@@ -39,6 +40,8 @@ namespace WC3Stats.Server
                 Console.WriteLine();
             }
             catch { }
+
+            Process.Start(new ProcessStartInfo("cmd", "/c start https://localhost:5001") { CreateNoWindow = true });
             return base.StartAsync(cancellationToken);
         }
 
@@ -54,7 +57,7 @@ namespace WC3Stats.Server
             {
 
                 List<Player> players;
-                if (true)
+                if (_configuration.Simulate)
                 {
 
                     await _hub.Clients.All.GameFound();
