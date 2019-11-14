@@ -19,7 +19,7 @@ namespace WC3Stats.Server
                 {
                     webBuilder.UseStartup<Startup>();
                     webBuilder.UseUrls(
-                        "https://localhost:5001", "http://localhost:5000", $"https://{Dns.GetHostName()}:5001");
+                        "https://localhost:5001", "http://localhost:5000", $"https://{Dns.GetHostName()}:5001", $"http://{Dns.GetHostName()}:5000");
                 });
     }
 }
