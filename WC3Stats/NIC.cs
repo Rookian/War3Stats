@@ -10,7 +10,7 @@ namespace WC3Stats
     public static class NIC
     {
         [DllImport("iphlpapi.dll", CharSet = CharSet.Auto)]
-        private static extern int GetBestInterface(UInt32 destAddr, out UInt32 bestIfIndex);
+        private static extern int GetBestInterface(uint destAddr, out uint bestIfIndex);
 
         public static string GetDefaultId(IPAddress destinationAddress)
         {
@@ -21,34 +21,32 @@ namespace WC3Stats
             if (result != 0)
                 throw new Win32Exception(result);
 
-            foreach (var ni in NetworkInterface.GetAllNetworkInterfaces().OrderBy(x => x.Description))
+            foreach (var networkInterface in NetworkInterface.GetAllNetworkInterfaces().OrderBy(x => x.Description))
             {
-                var niprops = ni.GetIPProperties();
-                if (niprops == null)
-                    continue;
+                var ipProperties = networkInterface.GetIPProperties();
 
-                var gateway = niprops.GatewayAddresses?.FirstOrDefault()?.Address;
+                var gateway = ipProperties?.GatewayAddresses?.FirstOrDefault()?.Address;
                 if (gateway == null)
                     continue;
 
-                if (ni.Supports(NetworkInterfaceComponent.IPv4))
+                if (networkInterface.Supports(NetworkInterfaceComponent.IPv4))
                 {
-                    var v4props = niprops.GetIPv4Properties();
-                    if (v4props == null)
+                    var iPv4Properties = ipProperties.GetIPv4Properties();
+                    if (iPv4Properties == null)
                         continue;
 
-                    if (v4props.Index == interfaceIndex)
-                        return ni.Id;
+                    if (iPv4Properties.Index == interfaceIndex)
+                        return networkInterface.Id;
                 }
 
-                if (ni.Supports(NetworkInterfaceComponent.IPv6))
+                if (networkInterface.Supports(NetworkInterfaceComponent.IPv6))
                 {
-                    var v6props = niprops.GetIPv6Properties();
-                    if (v6props == null)
+                    var iPv6Properties = ipProperties.GetIPv6Properties();
+                    if (iPv6Properties == null)
                         continue;
 
-                    if (v6props.Index == interfaceIndex)
-                        return ni.Id;
+                    if (iPv6Properties.Index == interfaceIndex)
+                        return networkInterface.Id;
                 }
             }
 

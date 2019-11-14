@@ -10,7 +10,7 @@ namespace WC3Stats
         {
             var nicName = NIC.GetDefaultId(ip);
             var device = CaptureDeviceList.Instance
-                .SingleOrDefault(x => x.Name.Replace("rpcap://\\Device\\NPF_", "") == nicName);
+                .SingleOrDefault(x => x.Name.Replace(@"\Device\NPF_", "") == nicName);
             return device;
         }
     }
