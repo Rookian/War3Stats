@@ -15,6 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="SharpPcap">
+      <HintPath>..\libs\SharpPcap.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="web.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

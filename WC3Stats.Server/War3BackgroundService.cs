@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
@@ -42,8 +43,25 @@ namespace WC3Stats.Server
             }
             catch { }
 
-            Process.Start(new ProcessStartInfo("cmd", $"/c start http://{Dns.GetHostName()}:5000") { CreateNoWindow = true });
+            
+            Process.Start(new ProcessStartInfo("cmd", $"/c start http://{GetLocalIPAddress()}:5000") { CreateNoWindow = true });
             return base.StartAsync(cancellationToken);
+        }
+
+        private static IPAddress GetLocalIPAddress()
+        {
+            var device = NIC.GetDefaultNetworkInterface(GameMonitor.NorthrendIP);
+
+            var ipInterfaceProperties = device.GetIPProperties();
+            foreach (var ipAddressInformation in ipInterfaceProperties.UnicastAddresses)
+            {
+                if (ipAddressInformation.Address.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ipAddressInformation.Address;
+                }
+            }
+         
+            throw new Exception("Could not find local ip address.");
         }
 
         private static void WriteLineRight(string value)

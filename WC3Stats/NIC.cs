@@ -12,12 +12,11 @@ namespace WC3Stats
         [DllImport("iphlpapi.dll", CharSet = CharSet.Auto)]
         private static extern int GetBestInterface(uint destAddr, out uint bestIfIndex);
 
-        public static string GetDefaultId(IPAddress destinationAddress)
+        public static NetworkInterface GetDefaultNetworkInterface(IPAddress destinationAddress)
         {
             var destaddr = BitConverter.ToUInt32(destinationAddress.GetAddressBytes(), 0);
 
-            uint interfaceIndex;
-            int result = GetBestInterface(destaddr, out interfaceIndex);
+            int result = GetBestInterface(destaddr, out var interfaceIndex);
             if (result != 0)
                 throw new Win32Exception(result);
 
@@ -36,7 +35,7 @@ namespace WC3Stats
                         continue;
 
                     if (iPv4Properties.Index == interfaceIndex)
-                        return networkInterface.Id;
+                        return networkInterface;
                 }
 
                 if (networkInterface.Supports(NetworkInterfaceComponent.IPv6))
@@ -46,7 +45,7 @@ namespace WC3Stats
                         continue;
 
                     if (iPv6Properties.Index == interfaceIndex)
-                        return networkInterface.Id;
+                        return networkInterface;
                 }
             }
 

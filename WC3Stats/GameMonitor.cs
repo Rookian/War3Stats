@@ -11,10 +11,12 @@ namespace WC3Stats
 {
     public static class GameMonitor
     {
+        public static readonly IPAddress NorthrendIP = IPAddress.Parse("5.42.181.0");
+
         public static async Task<List<Player>> LookForPlayers(Func<Task> onGameFound = null)
         {
             var players = new List<Player>();
-            var device = IPAddress.Parse("5.42.181.0").GetDefaultCaptureDevice();
+            var device = NorthrendIP.GetDefaultCaptureDevice();
             device.Open(DeviceMode.Promiscuous, 1000);
             device.Filter = "ip and tcp";
 

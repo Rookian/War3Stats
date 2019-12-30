@@ -8,7 +8,7 @@ namespace WC3Stats
     {
         public static ICaptureDevice GetDefaultCaptureDevice(this IPAddress ip)
         {
-            var nicName = NIC.GetDefaultId(ip);
+            var nicName = NIC.GetDefaultNetworkInterface(ip).Id;
             var device = CaptureDeviceList.Instance
                 .SingleOrDefault(x => x.Name.Replace(@"\Device\NPF_", "") == nicName);
             return device;
